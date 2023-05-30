@@ -8,7 +8,7 @@ const User = require('./models/User');
 const sequelize = require('./utils/database.js');
 const { ChatTokenBuilder } = agoraToken
 
-const hostname = '192.168.100.172'
+const hostname = 'localhost'
 const port = 3000
 
 // Get the appId and appCertificate from the agora console
