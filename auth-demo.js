@@ -1,14 +1,40 @@
 const express = require("express");
-const app = express()
+
 const fetch = require('node-fetch')
+const bodyParser = require("body-parser");
 const cors = require('cors');
 const agoraToken = require('agora-token');
 const User = require('./models/User');
+
 // import dbConnect from './utils/dbConnect'
 const sequelize = require('./utils/database.js');
 const { ChatTokenBuilder } = agoraToken
 
-const hostname = 'localhost'
+const app = express();
+
+const admin = require("firebase-admin");
+
+const serviceAccount = require("./firebase.json");
+
+
+var MESSAGING_SCOPE = 'https://www.googleapis.com/auth/firebase.messaging';
+var SCOPES = [MESSAGING_SCOPE];
+
+
+serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+//console.log(JSON.stringify(serviceAccount));
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+ databaseURL: "https://astrokingbeta-default-rtdb.firebaseio.com"
+});
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.raw());
+
+
+const hostname = '192.168.100.172'
 const port = 3000
 
 // Get the appId and appCertificate from the agora console
@@ -23,7 +49,7 @@ const chatRegisterURL = "https://a61.chat.agora.io/61838540/1036708/users"
 // https://a61.chat.agora.io/61838540/1036708/messages/users
 
 app.use(cors())
-app.use(express.json())
+//app.use(express.json())
 
 sequelize.sync(); 
 
@@ -46,7 +72,35 @@ app.post('/login', async (req, res) => {
       message: 'You account or password is wrong'
     })
   }
-})
+});
+
+
+
+app.post('/send_fcm_push_notification', async (req, res, next) => {
+  
+  try {
+    const { title, body, imageUrl, regtoken } = req.body;
+    console.log('my registrationoken passed id::'+regtoken);
+    //Multicast
+    console.log('title:'+title+'body:'+body+'img:'+imageUrl);
+    await admin.messaging().send({
+      token: regtoken,
+      notification: {
+        "title":title,
+        "body":body,
+        "image":imageUrl,
+      },
+    });
+    console.log('title:'+title+'body:'+body+'img:'+imageUrl);
+    res.status(200).json({ message: "Successfully sent notifications!" });
+  } catch (err) {
+    res
+      .status(err.status || 500)
+      .json({ message: err.message || "Something went wrong!" });
+  }
+});
+
+
 
 //const appToken = 
 //ChatTokenBuilder.buildAppToken(appId, appCertificate, expirationInSeconds);
@@ -68,7 +122,7 @@ app.post('/apptoken', async (req, res) => {
  //     message: 'You account or password is wrong'
  //   })
  // }
-})
+});
 
 
 app.post('/register', async (req, res) => {
@@ -113,6 +167,6 @@ app.post('/register', async (req, res) => {
 
 })
 
-app.listen(port, () => {
+app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
