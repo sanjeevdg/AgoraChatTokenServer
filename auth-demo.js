@@ -79,19 +79,20 @@ app.post('/login', async (req, res) => {
 app.post('/send_fcm_push_notification', async (req, res, next) => {
   
   try {
-    const { title, body, imageUrl, regtoken } = req.body;
+    const { title, body, imageUrl, regtoken, user_id,astro_id } = req.body;
     console.log('my registrationoken passed id::'+regtoken);
     //Multicast
-    console.log('title:'+title+'body:'+body+'img:'+imageUrl);
+
     await admin.messaging().send({
       token: regtoken,
+	  data:{"user_id":user_id,"astro_id":astro_id},
       notification: {
         "title":title,
         "body":body,
         "image":imageUrl,
       },
     });
-    console.log('title:'+title+'body:'+body+'img:'+imageUrl);
+    console.log('title:'+title+'body:'+body+'img:'+imageUrl+'usrid:'+user_id+'astroid'+astro_id);
     res.status(200).json({ message: "Successfully sent notifications!" });
   } catch (err) {
     res
