@@ -83,14 +83,24 @@ app.post('/send_fcm_push_notification', async (req, res, next) => {
     console.log('my registrationoken passed id::'+regtoken);
     //Multicast
 
-    await admin.messaging().send({
-      token: regtoken,
-	  data:{"user_id":user_id,"astro_id":astro_id},
-      notification: {
+	  
+	  /*
+	  notification: {
         "title":title,
         "body":body,
         "image":imageUrl,
       },
+      */
+    await admin.messaging().send({
+      token: regtoken,
+	  data:{
+		"msgtitle":title,
+		  "msgbody":body,
+		  "msgimage":imageUrl,
+		  "user_id":user_id,
+		  "astro_id":astro_id,
+	  },
+	    {priority: 'high',},
     });
     console.log('title:'+title+'body:'+body+'img:'+imageUrl+'usrid:'+user_id+'astroid'+astro_id);
     res.status(200).json({ message: "Successfully sent notifications!" });
