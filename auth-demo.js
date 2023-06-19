@@ -100,7 +100,7 @@ app.post('/send_fcm_push_notification', async (req, res, next) => {
 		  "user_id":user_id,
 		  "astro_id":astro_id,
 	  },
-	    {priority: 'high',},
+	    {priority: 'high'},
     });
     console.log('title:'+title+'body:'+body+'img:'+imageUrl+'usrid:'+user_id+'astroid'+astro_id);
     res.status(200).json({ message: "Successfully sent notifications!" });
