@@ -97,14 +97,14 @@ app.post('/send_fcm_push_notification', async (req, res, next) => {
 		"msgtitle":title,
 		  "msgbody":body,
 		  "msgimage":imageUrl,
-		  "user_id":user_id,
-		  "astro_id":astro_id,
+		  "student_id":student_id,
+		  "teacher_id":teacher_id,
 	  },
 	     "android":{
 	"priority": "high"
 	     },
     });
-    console.log('title:'+title+'body:'+body+'img:'+imageUrl+'usrid:'+user_id+'astroid'+astro_id);
+    console.log('title:'+title+'body:'+body+'img:'+imageUrl+'stdid:'+student_id+'tchid'+teacher_id);
     res.status(200).json({ message: "Successfully sent notifications!" });
   } catch (err) {
     res
