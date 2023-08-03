@@ -26,7 +26,7 @@ serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
- databaseURL: "https://astrokingbeta-default-rtdb.firebaseio.com"
+ databaseURL: "https://onlineclass-1d1e5-default-rtdb.firebaseio.com"
 });
 
 app.use(bodyParser.json());
