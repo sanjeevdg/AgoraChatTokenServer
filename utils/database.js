@@ -12,7 +12,7 @@ const sequelize = new Sequelize('astrodb', 'sanjeev.dasgupta', '6jNiyWEKxoA1', {
     host: 'ep-solitary-meadow-593229.ap-southeast-1.aws.neon.tech'
 });
 
-postgres://sanjeev.dasgupta@ep-solitary-meadow-593229.ap-southeast-1.aws.neon.tech/
+//postgres://sanjeev.dasgupta@ep-solitary-meadow-593229.ap-southeast-1.aws.neon.tech/
 
 /** REMOTE DEV ENV SETTINGSS
 # Connection details
