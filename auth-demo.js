@@ -79,7 +79,7 @@ app.post('/login', async (req, res) => {
 app.post('/send_fcm_push_notification', async (req, res, next) => {
   
   try {
-    const { title, body, imageUrl, regtoken, user_id,astro_id } = req.body;
+    const { title, body, imageUrl, regtoken, student_id, teacher_id } = req.body;
     console.log('my registrationoken passed id::'+regtoken);
     //Multicast
 
