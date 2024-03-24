@@ -79,7 +79,7 @@ app.post('/login', async (req, res) => {
 app.post('/send_fcm_push_notification', async (req, res, next) => {
   
   try {
-    const { title, body, imageUrl, regtoken, student_id, teacher_id } = req.body;
+    const { title, body, imageUrl, regtoken, student_id, teacher_id,url } = req.body;
     console.log('my registrationoken passed id::'+regtoken);
     //Multicast
 
@@ -96,6 +96,7 @@ app.post('/send_fcm_push_notification', async (req, res, next) => {
 	  "data":{
 		"msgtitle":title,
 		  "msgbody":body,
+		  "url":url,
 		  "msgimage":imageUrl,
 		  "student_id":student_id,
 		  "teacher_id":teacher_id,
@@ -104,7 +105,7 @@ app.post('/send_fcm_push_notification', async (req, res, next) => {
 	"priority": "high"
 	     },
     });
-    console.log('title:'+title+'body:'+body+'img:'+imageUrl+'stdid:'+student_id+'tchid'+teacher_id);
+    console.log('title:'+title+'body:'+body+'img:'+imageUrl+'stdid:'+student_id+'tchid'+teacher_id+'url='+url);
     res.status(200).json({ message: "Successfully sent notifications!" });
   } catch (err) {
     res
