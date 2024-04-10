@@ -109,9 +109,9 @@ app.post('/generate_rtc_token', async (req, res) => {
         code: "RES_OK",
         expireTimestamp: expirationTimeInSeconds,
         rtcToken: tokenA // agorachatAuthToken
-      })
+      });
 
-
+}
 	  
 });
 
