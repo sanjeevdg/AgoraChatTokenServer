@@ -8,7 +8,7 @@ const User = require('./models/User');
 
 // import dbConnect from './utils/dbConnect'
 const sequelize = require('./utils/database.js');
-const { ChatTokenBuilder } = agoraToken
+const { RtcTokenBuilder,ChatTokenBuilder,RtcRole } = agoraToken
 
 const app = express();
 
@@ -74,7 +74,58 @@ app.post('/login', async (req, res) => {
   }
 });
 
+app.post('/generate_rtc_token', async (req, res) => {
+ 
+  const channelName = '';
+  const role = RtcRole.PUBLISHER;
 
+	const user = await User.findOne({where:{account: req.body.account}})
+  if (user) {
+  
+  const expirationTimeInSeconds = 3600
+
+  const currentTimestamp = Math.floor(Date.now() / 1000)
+
+  const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds
+
+  // IMPORTANT! Build token with either the uid or with the user account. Comment out the option you do not want to use below.
+
+  // Build token with uid
+  const tokenA = RtcTokenBuilder.buildTokenWithUid(
+      appId,
+      appCertificate,
+      req.body.channel,
+      user.userUuid,
+      role,
+      expirationTimeInSeconds,
+      privilegeExpiredTs
+    );
+  console.log("Token With Integer Number Uid: " + tokenA);
+
+
+ res
+      .status(200)
+      .json({
+        code: "RES_OK",
+        expireTimestamp: expirationTimeInSeconds,
+        rtcToken: tokenA // agorachatAuthToken
+      })
+
+
+	  
+});
+
+  // Build token with user account 
+	/*
+  const tokenB = RtcTokenBuilder.buildTokenWithUserAccount(
+    appId,
+    appCertificate,
+    channelName,
+    userAccount,
+    role, 
+    privilegeExpiredTs);
+  console.log("Token With UserAccount: " + tokenB);
+  */
 
 app.post('/send_fcm_push_notification', async (req, res, next) => {
   
