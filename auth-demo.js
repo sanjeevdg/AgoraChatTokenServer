@@ -91,18 +91,16 @@ app.post('/generate_rtc_token', async (req, res) => {
   // IMPORTANT! Build token with either the uid or with the user account. Comment out the option you do not want to use below.
 
   // Build token with uid
-
- const tokenB = RtcTokenBuilder.buildTokenWithUserAccount(
-    appId,
-    appCertificate,
-    channelName,
-    req.body.account,
-    role, 
-    privilegeExpiredTs);
-  console.log("Token With UserAccount: " + tokenB);
-	  
- 
-
+ const tokenA = RtcTokenBuilder.buildTokenWithUid(
+      appId,
+      appCertificate,
+      req.body.channel,
+      req.body.account,
+      role,
+      expirationTimeInSeconds,
+      privilegeExpiredTs
+    );
+  console.log("Token With Integer Number Uid: " + tokenA);
 
  res
       .status(200)
@@ -118,16 +116,14 @@ app.post('/generate_rtc_token', async (req, res) => {
 
   // Build token with user account 
 	/*
-  const tokenA = RtcTokenBuilder.buildTokenWithUid(
-      appId,
-      appCertificate,
-      req.body.channel,
-      user.userUuid,
-      role,
-      expirationTimeInSeconds,
-      privilegeExpiredTs
-    );
-  console.log("Token With Integer Number Uid: " + tokenA);
+ const tokenB = RtcTokenBuilder.buildTokenWithUserAccount(
+    appId,
+    appCertificate,
+    channelName,
+    req.body.account,
+    role, 
+    privilegeExpiredTs);
+  console.log("Token With UserAccount: " + tokenB); 
   */
 
 app.post('/send_fcm_push_notification', async (req, res, next) => {
