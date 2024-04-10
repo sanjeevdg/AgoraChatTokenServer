@@ -91,6 +91,33 @@ app.post('/generate_rtc_token', async (req, res) => {
   // IMPORTANT! Build token with either the uid or with the user account. Comment out the option you do not want to use below.
 
   // Build token with uid
+
+ const tokenB = RtcTokenBuilder.buildTokenWithUserAccount(
+    appId,
+    appCertificate,
+    channelName,
+    req.body.account,
+    role, 
+    privilegeExpiredTs);
+  console.log("Token With UserAccount: " + tokenB);
+	  
+ 
+
+
+ res
+      .status(200)
+      .json({
+        code: "RES_OK",
+        expireTimestamp: expirationTimeInSeconds,
+        rtcToken: tokenB // agorachatAuthToken
+      });
+
+}
+	  
+});
+
+  // Build token with user account 
+	/*
   const tokenA = RtcTokenBuilder.buildTokenWithUid(
       appId,
       appCertificate,
@@ -101,30 +128,6 @@ app.post('/generate_rtc_token', async (req, res) => {
       privilegeExpiredTs
     );
   console.log("Token With Integer Number Uid: " + tokenA);
-
-
- res
-      .status(200)
-      .json({
-        code: "RES_OK",
-        expireTimestamp: expirationTimeInSeconds,
-        rtcToken: tokenA // agorachatAuthToken
-      });
-
-}
-	  
-});
-
-  // Build token with user account 
-	/*
-  const tokenB = RtcTokenBuilder.buildTokenWithUserAccount(
-    appId,
-    appCertificate,
-    channelName,
-    userAccount,
-    role, 
-    privilegeExpiredTs);
-  console.log("Token With UserAccount: " + tokenB);
   */
 
 app.post('/send_fcm_push_notification', async (req, res, next) => {
