@@ -86,7 +86,7 @@ app.post('/generate_rtc_token', async (req, res) => {
 	const user = await User.findOne({where:{account: req.body.account}})
   if (user) {
   
-  const expirationTimeInSeconds = 3600
+  const expirationTimeInSeconds = 7200;
 
   const currentTimestamp = Math.floor(Date.now() / 1000)
 
