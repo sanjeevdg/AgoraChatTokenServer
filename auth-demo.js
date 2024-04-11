@@ -105,7 +105,7 @@ app.post('/generate_rtc_token', async (req, res) => {
       expirationTimeInSeconds,
       privilegeExpiredTs
     );
-  console.log("Token With Integer Number Uid: " + tokenA+"appid="+appId+"appcert="+appCertificate+"channel="+req.body.channel+"role="+role+"expirationTimeInSeconds="+expirationTimeInSeconds+"privilegeExpiredTs"+privilegeExpiredTs);
+  console.log("Token With Integer Number Uid: "+"acct="+parseInt(req.body.account) + tokenA+"appid="+appId+"appcert="+appCertificate+"channel="+req.body.channel+"role="+role+"expirationTimeInSeconds="+expirationTimeInSeconds+"privilegeExpiredTs"+privilegeExpiredTs);
 
  res
       .status(200)
