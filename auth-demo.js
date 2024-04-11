@@ -1,5 +1,5 @@
-const RtcTokenBuilder = require("./api/RtcTokenBuilder2").RtcTokenBuilder;
-const RtcRole = require("./api/RtcTokenBuilder2").Role;
+const RtcTokenBuilder = require("./api/RtcTokenBuilder").RtcTokenBuilder;
+const RtcRole = require("./api/RtcTokenBuilder").Role;
 
 const express = require("express");
 
