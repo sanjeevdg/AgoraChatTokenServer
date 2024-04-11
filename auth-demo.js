@@ -106,7 +106,7 @@ app.post('/generate_rtc_token', async (req, res) => {
   console.log("Token With UserAccount: " + tokenB); 
 	  
  
-  console.log("Token With Integer Number Uid: "+"acct="+parseInt(req.body.account) + tokenA+"appid="+appId+"appcert="+appCertificate+"channel="+req.body.channel+"role="+role+"privilegeExpiredTs"+privilegeExpiredTs);
+  console.log("Token With Integer Number Uid: "+"acct="+parseInt(req.body.account) + tokenB+"appid="+appId+"appcert="+appCertificate+"channel="+req.body.channel+"role="+role+"privilegeExpiredTs"+privilegeExpiredTs);
 //+"expirationTimeInSeconds="+expirationTimeInSeconds
  res
       .status(200)
