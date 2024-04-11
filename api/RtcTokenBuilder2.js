@@ -1,5 +1,5 @@
-const AccessToken = require('../src/AccessToken2').AccessToken2
-const ServiceRtc = require('../src/AccessToken2').ServiceRtc
+const AccessToken = require('./AccessToken2').AccessToken2
+const ServiceRtc = require('./AccessToken2').ServiceRtc
 
 const Role = {
     // for live broadcaster
