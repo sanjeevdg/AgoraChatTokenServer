@@ -1,5 +1,5 @@
-const RtcTokenBuilder = require("./api/RtcTokenBuilder").RtcTokenBuilder;
-const RtcRole = require("./api/RtcTokenBuilder").Role;
+const RtcTokenBuilder = require("./api/RtcTokenBuilder2").RtcTokenBuilder;
+const RtcRole = require("./api/RtcTokenBuilder2").Role;
 
 const express = require("express");
 
@@ -96,7 +96,7 @@ app.post('/generate_rtc_token', async (req, res) => {
 
 
   // Build token with uid
- const tokenB = RtcTokenBuilder.buildTokenWithAccount(
+ const tokenB = RtcTokenBuilder.buildTokenWithUserAccount(
     appId,
     appCertificate,
     channelName,
@@ -112,7 +112,7 @@ app.post('/generate_rtc_token', async (req, res) => {
       .status(200)
       .json({
         code: "RES_OK",
-        expireTimestamp: expirationTimeInSeconds,
+        expireTimestamp: privilegeExpiredTs,
         rtcToken: tokenB // agorachatAuthToken
       });
 
