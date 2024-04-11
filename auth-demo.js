@@ -96,31 +96,6 @@ app.post('/generate_rtc_token', async (req, res) => {
 
 
   // Build token with uid
- const tokenA = RtcTokenBuilder.buildTokenWithUid(
-      appId,
-      appCertificate,
-      req.body.channel,
-      parseInt(req.body.account),
-      role,
-      expirationTimeInSeconds,
-      privilegeExpiredTs
-    );
-  console.log("Token With Integer Number Uid: "+"acct="+parseInt(req.body.account) + tokenA+"appid="+appId+"appcert="+appCertificate+"channel="+req.body.channel+"role="+role+"expirationTimeInSeconds="+expirationTimeInSeconds+"privilegeExpiredTs"+privilegeExpiredTs);
-
- res
-      .status(200)
-      .json({
-        code: "RES_OK",
-        expireTimestamp: expirationTimeInSeconds,
-        rtcToken: tokenA // agorachatAuthToken
-      });
-
-}
-	  
-});
-
-  // Build token with user account 
-	/*
  const tokenB = RtcTokenBuilder.buildTokenWithUserAccount(
     appId,
     appCertificate,
@@ -129,6 +104,33 @@ app.post('/generate_rtc_token', async (req, res) => {
     role, 
     privilegeExpiredTs);
   console.log("Token With UserAccount: " + tokenB); 
+	  
+ 
+  console.log("Token With Integer Number Uid: "+"acct="+parseInt(req.body.account) + tokenA+"appid="+appId+"appcert="+appCertificate+"channel="+req.body.channel+"role="+role+"privilegeExpiredTs"+privilegeExpiredTs);
+//+"expirationTimeInSeconds="+expirationTimeInSeconds
+ res
+      .status(200)
+      .json({
+        code: "RES_OK",
+        expireTimestamp: expirationTimeInSeconds,
+        rtcToken: tokenB // agorachatAuthToken
+      });
+
+}
+	  
+});
+
+  // Build token with user account 
+	/*
+const tokenA = RtcTokenBuilder.buildTokenWithUid(
+      appId,
+      appCertificate,
+      req.body.channel,
+      parseInt(req.body.account),
+      role,
+      expirationTimeInSeconds,
+      privilegeExpiredTs
+    );
   */
 
 app.post('/send_fcm_push_notification', async (req, res, next) => {
