@@ -96,7 +96,7 @@ app.post('/generate_rtc_token', async (req, res) => {
 
 
   // Build token with uid
- const tokenB = RtcTokenBuilder.buildTokenWithUserAccount(
+ const tokenB = RtcTokenBuilder.buildTokenWithAccount(
     appId,
     appCertificate,
     channelName,
