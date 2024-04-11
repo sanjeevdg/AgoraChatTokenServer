@@ -95,7 +95,7 @@ app.post('/generate_rtc_token', async (req, res) => {
       appId,
       appCertificate,
       req.body.channel,
-      req.body.account,
+      parseInt(req.body.account),
       role,
       expirationTimeInSeconds,
       privilegeExpiredTs
