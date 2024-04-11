@@ -40,6 +40,7 @@ const port = 3000
 // Get the appId and appCertificate from the agora console
 const appId = "77a773d5d11d4ee489d52fe863eb9cd7";
 const appCertificate = "0c58a56303b0443bbf625c57ae024c24";
+
 // Token expire time, hardcode to 86400 seconds = 1 day
 const expirationInSeconds = 86400;
 
@@ -100,7 +101,7 @@ app.post('/generate_rtc_token', async (req, res) => {
       expirationTimeInSeconds,
       privilegeExpiredTs
     );
-  console.log("Token With Integer Number Uid: " + tokenA);
+  console.log("Token With Integer Number Uid: " + tokenA+"appid="+appId+"appcert="+appCertificate+"channel="+req.body.channel+"role="+role+"expirationTimeInSeconds="+expirationTimeInSeconds+"privilegeExpiredTs"+privilegeExpiredTs);
 
  res
       .status(200)
