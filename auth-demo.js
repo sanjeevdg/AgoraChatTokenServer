@@ -1,3 +1,6 @@
+const RtcTokenBuilder = require("./api/RtcTokenBuilder2").RtcTokenBuilder;
+const RtcRole = require("./api/RtcTokenBuilder2").Role;
+
 const express = require("express");
 
 const fetch = require('node-fetch')
@@ -8,7 +11,7 @@ const User = require('./models/User');
 
 // import dbConnect from './utils/dbConnect'
 const sequelize = require('./utils/database.js');
-const { RtcTokenBuilder,ChatTokenBuilder,RtcRole } = agoraToken
+const { ChatTokenBuilder } = agoraToken
 
 const app = express();
 
@@ -90,6 +93,7 @@ app.post('/generate_rtc_token', async (req, res) => {
   const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds
 
   // IMPORTANT! Build token with either the uid or with the user account. Comment out the option you do not want to use below.
+
 
   // Build token with uid
  const tokenA = RtcTokenBuilder.buildTokenWithUid(
